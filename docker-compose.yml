@@ -17,10 +17,24 @@ services:
       - "3000:3000"
     depends_on:
       - db
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: testdb
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+
+      BACKUP_SECRET: backups
+
+      AWS_REGION: eu-west-1
+      AWS_ACCESS_KEY_ID: TON_ACCESS_KEY
+      AWS_SECRET_ACCESS_KEY: TON_SECRET_KEY
+      S3_BUCKET_NAME: quartissimo-612782034056-eu-west-1-an
+      S3_BACKUP_PREFIX: postgres
 
   frontend:
     build: ./frontend
     ports:
-      - "80:80"
+      - "8080:80"
     depends_on:
       - backend
